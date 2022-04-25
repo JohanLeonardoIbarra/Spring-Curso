@@ -28,12 +28,12 @@ const loadUsers = async () => {
 };
 
 const deleteUser = async (id) => {
-    console.log(id);
     const response = await fetch(`http://localhost:8080/users/${id}`, {
         method: 'DELETE'
     });
     const data = await response.json();
-    console.log(data);
+    tbody.innerHTML = "";
+    loadUsers();
 };
 
 

@@ -1,15 +1,29 @@
 package xyz.bskapp.springrest.models;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
+@ToString
 public class User {
+    @Getter @Setter @Column(name = "id") @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Getter @Setter @Column(name = "_name")
     private String name;
+    @Getter @Setter @Column(name = "_lastname")
     private String lastname;
+    @Getter @Setter @Column(name = "_email")
     private String email;
+    @Getter @Setter @Column(name = "_password")
     private String password;
+    @Getter @Setter @Column(name = "_phone")
     private String phone;
 
-    public User(int id, String name, String lastname, String email, String password, String phone) {
-        this.id = id;
+    public User(String name, String lastname, String email, String password, String phone) {
         this.name = name;
         this.lastname = lastname;
         this.email = email;
