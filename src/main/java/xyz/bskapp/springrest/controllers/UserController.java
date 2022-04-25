@@ -1,5 +1,7 @@
 package xyz.bskapp.springrest.controllers;
 
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.bskapp.springrest.dao.UserDao;
@@ -34,6 +36,9 @@ public class UserController {
     public String createUser(@RequestBody User user){
         String response = "";
         try{
+            Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+            String hash = argon2.hash(10, 1024, 3, user.getPassword().toCharArray());
+            user.setPassword(hash);
             response = userDao.createUser(user);
         }catch (Exception e){
             response = "{\"message\": \"This email is already on use\"}";
