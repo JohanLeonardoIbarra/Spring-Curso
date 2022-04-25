@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import xyz.bskapp.springrest.dao.UserDao;
 import xyz.bskapp.springrest.models.User;
 
-import java.util.LinkedList;
 import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -23,8 +22,7 @@ public class UserController {
 
     @GetMapping(value = "users")
     public List<User> getUsers(){
-        List<User> users = userDao.getUsers();
-        return users;
+        return userDao.getUsers();
     }
 
     @GetMapping(value = "users/{id}")
@@ -34,7 +32,7 @@ public class UserController {
 
     @PostMapping(value = "users")
     public String createUser(@RequestBody User user){
-        String response = "";
+        String response;
         try{
             Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
             String hash = argon2.hash(10, 1024, 3, user.getPassword().toCharArray());
@@ -60,7 +58,7 @@ public class UserController {
 
     @DeleteMapping(value = "users/{id}")
     public String deleteUser(@PathVariable int id){
-        String response = "";
+        String response;
         try{
             response = userDao.deleteUser(id);
         }catch (Exception e){
