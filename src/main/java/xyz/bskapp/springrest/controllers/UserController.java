@@ -15,11 +15,6 @@ public class UserController {
     @Autowired
     private UserDao userDao;
 
-    @GetMapping(value = "test")
-    public List<String> test(){
-        return List.of("Hey", "My", "Name", "Is", "BerSerKer");
-    }
-
     @GetMapping(value = "users")
     public List<User> getUsers(){
         return userDao.getUsers();
@@ -44,7 +39,7 @@ public class UserController {
         return response;
     }
 
-/**
+
     @PutMapping(value = "users/{id}")
     public String updateUser(@PathVariable int id, @RequestBody User user){
         String response = "";
@@ -54,7 +49,7 @@ public class UserController {
             response = "{\"message\": \"User Unknown\"}";
         }
         return response;
-    }*/
+    }
 
     @DeleteMapping(value = "users/{id}")
     public String deleteUser(@PathVariable int id){

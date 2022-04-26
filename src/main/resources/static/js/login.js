@@ -15,7 +15,7 @@ const login = async () => {
     });
     const json = await response.json();
     if (json.login){
-        window.location.href = 'http://localhost:8080/';
+        window.location.href = 'http://localhost:8080/users.html';
     } else {
         alert('Login failed');
     }

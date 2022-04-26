@@ -31,9 +31,10 @@ public class userDaoImp implements UserDao {
     }
 
     @Override
-    public String updateUser(User user) {
-        entityManager.merge(user);
-        return "{ \"message\": \"User "+ user.getId() +" "+ user.getName() +" updated successfully\" }";
+    public String updateUser(int id, User user) {
+        String query = "UPDATE User u SET u.name = :name, u.email = :email WHERE u.id = :id";
+        entityManager.createQuery(query).setParameter("name", user.getName()).setParameter("email", user.getEmail()).setParameter("id", id).executeUpdate();
+        return "{ \"message\": \"User "+ id +" "+ user.getName() +" updated successfully\" }";
     }
 
     @Override
